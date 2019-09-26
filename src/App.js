@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Movie from './Movie';
 
 class App extends React.Component {
   state = {
@@ -7,9 +8,12 @@ class App extends React.Component {
     movies: []
   }
   getmovies = async () => {
-    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json")
+    const { data: { data: { movies } } } =
+      await axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=title")
     // axios는 생각보다 시간을 쓰기 때문에 자스에게 getmovies가 끝나기까지 시간이 좀 걸린다고 알려줘야함
     // 그래서 async/await으로 실행순서를 명시해줌(비동기를 동기화시켰다고 이해함)
+    this.setState({ movies, isLoading: false })
+    // 객체의 key 이름과 value이름이 같을 때 :value명 을 생략 가능
   }
   componentDidMount() {
     // 컴포넌트가 mount되면 getmovies를 호출하겠다는 것
@@ -17,10 +21,20 @@ class App extends React.Component {
   }
   // mounting => render => componentDidMount
   render() {
-    const { isLoading } = this.state
+    const { isLoading, movies } = this.state
     return (
       <div>
-        {isLoading ? "Loading..." : "We are ready"}
+        {isLoading ? "Loading..." : movies.map(({ id, year, title, summary, medium_cover_image }) => {
+          return (
+            <Movie
+              key={id}
+              id={id}
+              year={year}
+              title={title}
+              summary={summary}
+              medium_cover_image={medium_cover_image}>
+            </Movie>)
+        })}
       </div>
     )
   }
