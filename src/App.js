@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 // 내가 전달받은 props가 내가 원하는 props인지 확인해주는 모듈
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    console.log("하이")
+  }
+  // 컴포넌트가 mount될 때, screen에 표시될 때, 내 웹사이트에 갈 때
+  // constructor를 호출한다.
+
   state = {
     count: 0
   }
@@ -26,10 +33,19 @@ class App extends React.Component {
     ));
   };
 
+  componentDidMount() {
+    console.log("컴포넌트 렌더링되었음!")
+  }
+
+  componentDidUpdate() {
+    console.log("방금 갱신되었습니다.");
+  }
+
   // React.Component가 함수 기반 컴포넌트가 아닌 클래스 기반 컴포넌트이기에
   // return이 아닌 render()메소드를 가진다
   // 함수 기반 컴포넌트가 아닌 클래스 기반 컴포넌트를 쓰는 이유는 state때문이라고 함
   render() {
+    console.log("렌더링중")
     return (
       <div>
         <h1>클래스 기반 컴포넌트란다</h1>
@@ -41,6 +57,12 @@ class App extends React.Component {
     )
   }
 }
+
+// lifecycle
+
+// mounting: 생성
+// updating
+// unmounting: 다른 페이지로 넘어가면서 컴포넌트 소멸 or state의 변화로 기존 컴포넌트 소멸
 
 
 export default App;
