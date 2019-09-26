@@ -9,9 +9,21 @@ class App extends React.Component {
 
   add = () => {
     console.log("add");
+    // this.state.count += 1;
+    // 위처럼 하면 리액트가 render메소드를 refresh하지 않음
+    // 즉, state의 상태를 변경하려면 render 메소드를 호출함으로써 해야함
+    this.setState(current => (
+      { count: current.count + 1 }
+    ));
+    // 따라서 state의 상태를 변경하기 위해서는 this.setState메소드를 써야함
+    // this.setState을 써줘야 인자로 전달된 state를 기반으로 render메소드가 재호출되기 때문
+    // count를 호출할 때 this.state.count처럼 state에 직접적으로 의존하는 것은 좋지 않다고 함.
   };
   minus = () => {
     console.log("minus");
+    this.setState(current => (
+      { count: current.count - 1 }
+    ));
   };
 
   // React.Component가 함수 기반 컴포넌트가 아닌 클래스 기반 컴포넌트이기에
