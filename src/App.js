@@ -1,9 +1,11 @@
 import React from 'react';
+import Potato from './Potato'
 
 function App() {
   return (
     <div className="App">
-      하이?
+      <h1>하이?</h1>
+      <Potato />
     </div>
   );
 }
