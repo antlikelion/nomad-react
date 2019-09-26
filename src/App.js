@@ -15,6 +15,7 @@ function Food({ name, age, nick }) {
   // jsx안에서 변수는 {}에 삽입하면 된다
 }
 
+// 여기서의 'propTypes'는 커스텀할 수 있는 것이 아님 반드시 'propTypes'이어야 함
 Food.propTypes = {
   name: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired,
